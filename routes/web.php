@@ -5,7 +5,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoutController;
-
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +27,6 @@ Route::get("/login", [ LoginController::class, "index" ])->name("login");
 Route::post("/login", [ LoginController::class, "action" ]);
 
 Route::get('/logout', [ LogoutController::class, "logout" ])->name("logout");
+
+Route::get('/profile', [ ProfileController::class, "index" ])->name("profile");
+Route::post('/profile/update', [ ProfileController::class, "update" ])->name("profile.update");
