@@ -11,6 +11,12 @@ class LoginController extends Controller
     //
     public function index()
     {
+        $u = Auth::user();
+
+        if ($u) {
+            return redirect(route("home"));
+        }
+
         return view("login");
     }
 
@@ -35,5 +41,6 @@ class LoginController extends Controller
         }
 
         Auth::login($u);
+        return redirect(route("home"));
     }
 }
