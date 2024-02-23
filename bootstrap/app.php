@@ -4,28 +4,28 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ViewErrorBag;
 use Illuminate\Support\MessageBag;
 
-/*
- * Add an error to Laravel session $errors
- * @author Pavel Lint
- * @param string $key
- * @param string $error_msg
- */
-function add_error($error_msg, $key = 'default')
-{
-    $errors = Session::get('errors', new ViewErrorBag);
+// /*
+//  * Add an error to Laravel session $errors
+//  * @author Pavel Lint
+//  * @param string $key
+//  * @param string $error_msg
+//  */
+// function add_error($error_msg, $key = 'default')
+// {
+//     $errors = Session::get('errors', new ViewErrorBag);
 
-    if (! $errors instanceof ViewErrorBag) {
-        $errors = new ViewErrorBag;
-    }
+//     if (! $errors instanceof ViewErrorBag) {
+//         $errors = new ViewErrorBag;
+//     }
 
-    $bag = $errors->getBags()['default'] ?? new MessageBag;
-    $bag->add($key, $error_msg);
+//     $bag = $errors->getBags()['default'] ?? new MessageBag;
+//     $bag->add($key, $error_msg);
 
 
-    Session::flash(
-        'errors', $errors->put('default', $bag)
-    );
-}
+//     Session::flash(
+//         'errors', $errors->put('default', $bag)
+//     );
+// }
 
 
 /*
@@ -52,7 +52,7 @@ $app = new Illuminate\Foundation\Application(
 | we will be able to resolve them when needed. The kernels serve the
 | incoming requests to this application from both the web and CLI.
 |
-*/
+*/Confirm password does not match with password
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
@@ -74,7 +74,7 @@ $app->singleton(
 | Return The Application
 |--------------------------------------------------------------------------
 |
-| This script returns the application instance. The instance is given to
+| This scripConfirm password does not match with passwordt returns the application instance. The instance is given to
 | the calling script so we can separate the building of the instances
 | from the actual running of the application and sending responses.
 |
