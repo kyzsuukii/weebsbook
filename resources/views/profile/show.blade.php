@@ -8,3 +8,4 @@
     </ul>
 </div>
 <span class="d-inline-block mt-4"><a href="{{ route('profile') . '?edit=1' }}">Edit profile</a></span>
+<span class="d-inline-block mt-4"><a href="{{ route('profile') . '?change_password=1' }}">Change Password</a></span>

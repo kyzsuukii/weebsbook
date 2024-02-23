@@ -19,7 +19,7 @@ class ProfileController extends Controller
         return view("profile", compact("u"));
     }
 
-    public function update(Request $req)
+    public function update_profile(Request $req)
     {
         $u = Auth::user();
 
@@ -37,7 +37,7 @@ class ProfileController extends Controller
 
         if (!password_verify($req->password, $u->password)) {
             add_error("Password is incorrect");
-            return redirect(route("profile") . "?edit=1");
+            return redirect(route("profile") . "?edit_profile=1");
         }
 
         $u->fullname = $req->fullname;
@@ -49,6 +49,36 @@ class ProfileController extends Controller
         $u->save();
 
         return redirect(route("profile"));
+    }
 
+    public function update_password(Request $req)
+    {
+        $u = Auth::user();
+
+        if (!$u) {
+            return redirect(route("login"));
+        }
+
+        $req->validate([
+            "old_password" => "required|string|min:8",
+            "new_password" => "required|string|min:8",
+            "new_password2" => "required|string|min:8"
+        ]);
+
+        if (!password_verify($req->old_password, $u->password)) {
+            add_error("Old password is incorrect");
+            return redirect(route("profile") . "?change_password=1");
+        }
+
+        if ($req->new_password !== $req->new_password2) {
+            add_error("Confirm new password does not match with new password");
+            return redirect(route("profile") . "?change_password=1");
+        }
+
+        $u->password = password_hash($req->new_password, PASSWORD_BCRYPT);
+
+        $u->save();
+
+        return redirect(route("profile"));
     }
 }

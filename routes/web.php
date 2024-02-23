@@ -29,4 +29,5 @@ Route::post("/login", [ LoginController::class, "action" ]);
 Route::get('/logout', [ LogoutController::class, "logout" ])->name("logout");
 
 Route::get('/profile', [ ProfileController::class, "index" ])->name("profile");
-Route::post('/profile/update', [ ProfileController::class, "update" ])->name("profile.update");
+Route::post('/profile/update', [ ProfileController::class, "update_profile" ])->name("profile.update_profile");
+Route::post('/profile/update_password', [ ProfileController::class, "update_password" ])->name("profile.update_password");

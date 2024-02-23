@@ -1,4 +1,4 @@
-<form action="{{ route("profile.update") }}" method="POST">
+<form action="{{ route("profile.update_profile") }}" method="POST">
     @csrf
     <div class="mb-4">
         <label for="fullname" class="form-label">Fullname</label>
