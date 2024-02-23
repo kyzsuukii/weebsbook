@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
-</head>
-
-<body>
+@extends('layouts.page')
+@section("title", "Register")
+@section('body')
     <div class="container mb-4">
         <h1>Register</h1>
         <form action="" method="POST">
@@ -54,15 +45,6 @@
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
-        <span class="d-inline-block mt-4">Already have an account? <a href="{{ route("login") }}">Login</a></span>
+        <span class="d-inline-block mt-4">Already have an account? <a href="{{ route('login') }}">Login</a></span>
     </div>
-    @if ($errors->any())
-        <script>
-            alert("{{ implode('', $errors->all(':message')) }}")
-        </script>
-    @endif
-
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-</body>
-
-</html>
+@endsection
