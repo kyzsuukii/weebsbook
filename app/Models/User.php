@@ -24,6 +24,8 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'photo',
+        'photo_ext'
     ];
 
     /**
@@ -45,4 +47,13 @@ class User extends Authenticatable
         // 'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function photo(): string
+    {
+        if (is_null($this->photo)) {
+            return "default_profile.png";
+        }
+
+        return bin2hex($this->photo) . "." . $this->photo_ext;
+    }
 }

@@ -1,5 +1,6 @@
 <div class="card" style="width: 18rem;">
     <ul class="list-group list-group-flush">
+        <li class="list-group-item"><img class="rounded mx-auto d-block" width="200px" src="{{ asset('assets/img/' . $u->photo()) }}" alt="Photo profile" /></li>
         <li class="list-group-item">Fullname: {{ $u->fullname }}</li>
         <li class="list-group-item">Gender: {{ $u->gender === 'M' ? 'Male' : 'Female' }}</li>
         <li class="list-group-item">Phone: {{ $u->phone }}</li>

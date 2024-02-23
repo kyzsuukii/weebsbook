@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\File;
 
 class ProfileController extends Controller
 {
@@ -33,11 +34,35 @@ class ProfileController extends Controller
             "phone"     => "required|regex:/^\+?[0-9]{9,15}$/|unique:users,phone,{$u->id}",
             "username"  => "required|string|min:4|max:255|unique:users,username,{$u->id}|regex:/^[a-zA-Z0-9\.\_]+$/",
             "email"     => "required|email|max:255|unique:users,email,{$u->id}",
+            "photo"     => [
+                File::types(["jpg", "png", "jpeg", "gif", "bmp"])->min("1kb")->max("2mb")
+            ]
         ]);
 
         if (!password_verify($req->password, $u->password)) {
             add_error("Password is incorrect");
             return redirect(route("profile") . "?edit_profile=1");
+        }
+
+        if ($req->hasFile("photo")) {
+            $photo = $req->file("photo");
+
+            if (!$photo->isValid()) {
+                add_error("Invalid photo");
+                return redirect(route("profile") . "?edit_profile=1");
+            }
+
+            $photo_ext = $photo->extension();
+            $hash = hash_file("sha256", $photo->getPathName(), true);
+            $name = bin2hex($hash) . "." . $photo_ext;
+
+            if (!move_uploaded_file($photo->getPathname(), public_path("assets/img") . "/" . $name)) {
+                add_error("Failed to move upload file");
+                return redirect(route("profile") . "?edit_profile=1");
+            }
+
+            $u->photo = $hash;
+            $u->photo_ext = $photo_ext;
         }
 
         $u->fullname = $req->fullname;

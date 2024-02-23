@@ -1,8 +1,15 @@
-<form action="{{ route("profile.update_profile") }}" method="POST">
+<img class="rounded mx-auto d-block" width="200px" src="{{ asset('assets/img/' . $u->photo()) }}" alt="Photo profile" />
+
+<form action="{{ route('profile.update_profile') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="mb-4">
+        <label for="photo" class="form-label">Upload photo profile</label>
+        <input class="form-control" type="file" id="photo" name="photo" />
+    </div>
+    <div class="mb-4">
         <label for="fullname" class="form-label">Fullname</label>
-        <input type="text" name="fullname" id="fullname" value="{{ $u->fullname }}" class="form-control" required />
+        <input type="text" name="fullname" id="fullname" value="{{ $u->fullname }}" class="form-control"
+            required />
     </div>
     <p>Gender</p>
     <div class="form-check form-check-inline mb-4">
