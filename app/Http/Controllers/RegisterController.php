@@ -32,7 +32,8 @@ class RegisterController extends Controller
         ]);
 
         if ($req->password !== $req->password2) {
-            return redirect(route("register"))->withErrors(["Confirm password does not match with password"]);
+            add_error("Confirm password does not match with password");
+            return redirect(route("register"));
         }
 
         User::create([

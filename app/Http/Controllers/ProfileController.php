@@ -40,14 +40,16 @@ class ProfileController extends Controller
         ]);
 
         if (!password_verify($req->password, $u->password)) {
-            return redirect(route("profile") . "?edit_profile=1")->withErrors("Password is incorrect");
+            add_error("Password is incorrect");
+            return redirect(route("profile") . "?edit_profile=1");
         }
 
         if ($req->hasFile("photo")) {
             $photo = $req->file("photo");
 
             if (!$photo->isValid()) {
-                return redirect(route("profile") . "?edit_profile=1")->withErrors(["Invalid photo"]);
+                add_error("Invalid photo");
+                return redirect(route("profile") . "?edit_profile=1");
             }
 
             $photo_ext = $photo->extension();
@@ -55,7 +57,8 @@ class ProfileController extends Controller
             $name = bin2hex($hash) . "." . $photo_ext;
 
             if (!move_uploaded_file($photo->getPathname(), public_path("assets/img") . "/" . $name)) {
-                return redirect(route("profile") . "?edit_profile=1")->withErrors(["Failed to move upload file"]);
+                add_error("Failed to move upload file");
+                return redirect(route("profile") . "?edit_profile=1");
             }
 
             $u->photo = $hash;
@@ -88,11 +91,13 @@ class ProfileController extends Controller
         ]);
 
         if (!password_verify($req->old_password, $u->password)) {
-            return redirect(route("profile") . "?change_password=1")->withErrors(["Old password is incorrect"]);
+            add_error("Old password is incorrect");
+            return redirect(route("profile") . "?change_password=1");
         }
 
         if ($req->new_password !== $req->new_password2) {
-            return redirect(route("profile") . "?change_password=1")->withErrors(["Confirm new password does not match with new password"]);
+            add_error("Confirm new password does not match with new password");
+            return redirect(route("profile") . "?change_password=1");
         }
 
         $u->password = password_hash($req->new_password, PASSWORD_BCRYPT);

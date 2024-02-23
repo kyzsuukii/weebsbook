@@ -36,7 +36,8 @@ class LoginController extends Controller
         $u = $u->first();
 
         if (!$u || !password_verify($req->password, $u->password)) {
-            return redirect(route("login"))->withErrors(["Login Error"]);
+            add_error("Login error");
+            return redirect(route("login"));
         }
 
         Auth::login($u);
