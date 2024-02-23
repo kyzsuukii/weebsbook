@@ -54,6 +54,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
+        <span class="d-inline-block mt-4">Already have an account? <a href="{{ route("login") }}">Login</a></span>
     </div>
     @if ($errors->any())
         <script>

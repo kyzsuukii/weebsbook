@@ -1,5 +1,33 @@
 <?php
 
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\ViewErrorBag;
+use Illuminate\Support\MessageBag;
+
+/*
+ * Add an error to Laravel session $errors
+ * @author Pavel Lint
+ * @param string $key
+ * @param string $error_msg
+ */
+function add_error($error_msg, $key = 'default')
+{
+    $errors = Session::get('errors', new ViewErrorBag);
+
+    if (! $errors instanceof ViewErrorBag) {
+        $errors = new ViewErrorBag;
+    }
+
+    $bag = $errors->getBags()['default'] ?? new MessageBag;
+    $bag->add($key, $error_msg);
+
+
+    Session::flash(
+        'errors', $errors->put('default', $bag)
+    );
+}
+
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
