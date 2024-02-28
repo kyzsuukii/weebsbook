@@ -25,11 +25,13 @@
                                     <input type="password" name="password" id="password" class="form-control" required>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i> Login</button>
+                            <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i>
+                                Login</button>
                         </form>
                     </div>
                     <div class="card-footer text-center">
-                        <span class="d-inline-block">Don't have an account? <a href="{{ route('register') }}">Register</a></span>
+                        <span class="d-inline-block">Don't have an account? <a
+                                href="{{ route('register') }}">Register</a></span>
                     </div>
                 </div>
             </div>

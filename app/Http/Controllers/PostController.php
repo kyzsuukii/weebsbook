@@ -40,7 +40,6 @@ class PostController extends Controller
             $media = $req->file("media");
 
             foreach ($media as $item) {
-                dd($item->getMimeType());
 
                 $type = strtoupper(substr($item->getMimeType(), 0, 5));
 
@@ -70,10 +69,11 @@ class PostController extends Controller
                     "post_id" => $p->id,
                     "filename" => $hash,
                     "file_ext" => $file_ext,
-                    "type" => $type
+                    "type" => $type,
                 ]);
             }
         }
-        return redirect(route("home"));
+        return redirect(route("home"))->with(["success" => true, "message" => "
+A post has been created"]);
     }
 }

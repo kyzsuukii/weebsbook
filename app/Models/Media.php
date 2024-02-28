@@ -14,4 +14,9 @@ class Media extends Model
         "file_ext",
         "type"
     ];
+
+    public function getFilename()
+    {
+        return bin2hex($this->filename) . "." . $this->file_ext;
+    }
 }

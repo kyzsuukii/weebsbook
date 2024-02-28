@@ -14,4 +14,8 @@ class Post extends Model
         "content"
     ];
 
+    public function getMedia()
+    {
+        return Media::where("post_id", $this->id)->get();
+    }
 }
