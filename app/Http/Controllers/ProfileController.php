@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\File;
@@ -22,21 +23,21 @@ class ProfileController extends Controller
 
     public function update_profile(Request $req)
     {
-        $u = Auth::user();
+        $u = User::find(Auth::user()->id);
 
         if (!$u) {
             return redirect(route("login"));
         }
 
         $req->validate([
-            "fullname"  => "required|string|min:1|max:255|regex:/^[a-zA-Z ]+$/",
-            "gender"    => "required|string|in:M,F",
-            "phone"     => "required|regex:/^\+?[0-9]{9,15}$/|unique:users,phone,{$u->id}",
-            "username"  => "required|string|min:4|max:255|unique:users,username,{$u->id}|regex:/^[a-zA-Z0-9\.\_]+$/",
-            "email"     => "required|email|max:255|unique:users,email,{$u->id}",
-            "photo"     => [
-                File::types(["jpg", "png", "jpeg", "gif", "bmp"])->min("1kb")->max("2mb")
-            ]
+            "fullname" => "required|string|min:1|max:255|regex:/^[a-zA-Z ]+$/",
+            "gender" => "required|string|in:M,F",
+            "phone" => "required|regex:/^\+?[0-9]{9,15}$/|unique:users,phone,{$u->id}",
+            "username" => "required|string|min:4|max:255|unique:users,username,{$u->id}|regex:/^[a-zA-Z0-9\.\_]+$/",
+            "email" => "required|email|max:255|unique:users,email,{$u->id}",
+            "photo" => [
+                File::types(["jpg", "png", "jpeg", "gif", "bmp"])->min("1kb")->max("2mb"),
+            ],
         ]);
 
         if (!password_verify($req->password, $u->password)) {
@@ -78,7 +79,7 @@ class ProfileController extends Controller
 
     public function update_password(Request $req)
     {
-        $u = Auth::user();
+        $u = User::find(Auth::user()->id);
 
         if (!$u) {
             return redirect(route("login"));
@@ -87,7 +88,7 @@ class ProfileController extends Controller
         $req->validate([
             "old_password" => "required|string|min:8",
             "new_password" => "required|string|min:8",
-            "new_password2" => "required|string|min:8"
+            "new_password2" => "required|string|min:8",
         ]);
 
         if (!password_verify($req->old_password, $u->password)) {

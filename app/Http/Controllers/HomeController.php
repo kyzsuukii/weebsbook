@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Post;
 
 class HomeController extends Controller
 {
@@ -16,6 +19,8 @@ class HomeController extends Controller
             return redirect(route("login"));
         }
 
-        return view("home", compact("u"));
+        $p = Post::all();
+
+        return view("home", compact(["u", "p"]));
     }
 }

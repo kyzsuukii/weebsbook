@@ -41,6 +41,7 @@ class LoginController extends Controller
         }
 
         Auth::login($u);
-        return redirect(route("home"));
+
+        return redirect(route("home"))->with(["success" => true, "message" => "Login successfull"]);
     }
 }
