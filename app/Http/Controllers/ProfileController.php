@@ -74,7 +74,8 @@ class ProfileController extends Controller
 
         $u->save();
 
-        return redirect(route("profile"));
+        return redirect(route("profile"))->with(["success" => true, "message" => "Update profile successfull"]);
+        ct(route("profile"));
     }
 
     public function update_password(Request $req)
@@ -105,6 +106,6 @@ class ProfileController extends Controller
 
         $u->save();
 
-        return redirect(route("profile"));
+        return redirect(route("profile"))->with(["success" => true, "message" => "Update password successfull"]);
     }
 }
