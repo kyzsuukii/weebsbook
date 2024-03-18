@@ -13,7 +13,7 @@
             <h5 class="mb-0">Profile</h5>
         </div>
         <div class="card-body text-center">
-            <img class="card-img-top rounded-circle mx-auto mt-3" style="max-width: 150px;"
+            <img class="card-img-top rounded-circle mx-auto mt-3" style="width: 150px; height: 150px; object-fit: cover;"
                 src="{{ asset('assets/img/' . $u->photo()) }}" alt="Photo profile">
             <ul class="list-group list-group-flush mt-3">
                 <li class="list-group-item">Fullname: {{ $u->fullname }}</li>

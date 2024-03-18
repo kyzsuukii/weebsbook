@@ -8,7 +8,7 @@
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{{ route('profile') }}">
                         <img src="{{ asset('assets/img/' . $u->photo()) }}" alt="Avatar"
-                            class="rounded-circle border border-primary border-2" style="width: 38px; height: 38px;">
+                            class="rounded-circle border border-primary border-2" style="width: 38px; height: 38px; object-fit: cover;">
                     </a>
                 </li>
                 <li class="nav-item">
