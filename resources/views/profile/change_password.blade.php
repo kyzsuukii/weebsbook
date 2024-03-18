@@ -7,18 +7,21 @@
             @csrf
             <div class="mb-3">
                 <label for="old_password" class="form-label">Old password</label>
-                <input type="password" name="old_password" id="old_password" class="form-control" required />
+                <input type="password" name="old_password" id="old_password" class="form-control" required
+                    placeholder="Enter your old password" />
             </div>
             <div class="mb-3">
                 <label for="new_password" class="form-label">New password</label>
-                <input type="password" name="new_password" id="new_password" class="form-control" required />
+                <input type="password" name="new_password" id="new_password" class="form-control" required
+                    placeholder="Enter your new password" />
             </div>
             <div class="mb-3">
                 <label for="new_password2" class="form-label">Confirm new password</label>
-                <input type="password" name="new_password2" id="new_password2" class="form-control" required />
+                <input type="password" name="new_password2" id="new_password2" class="form-control" required
+                    placeholder="Confirm your new password" />
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
             <a href="{{ route('profile') }}" class="btn btn-secondary">Cancel</a>
-        </form>
+            </form>
     </div>
 </div>
